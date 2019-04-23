@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">短信导入</string>
+    <string name="setting_default_sms_app">设置为默认短信</string>
+    <string name="import_inner_data">导入内嵌数据</string>
+    <string name="import_from_outer">选择外部数据文件导入</string>
+    <string name="app_had_set_been_default">"设置默认短信成功"</string>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">SMS Insert</string>
+    <string name="setting_default_sms_app">Set As Default SMS App</string>
+    <string name="import_inner_data">Import Default Sms DataSet</string>
+    <string name="import_from_outer">Import From SD Card</string>
+    <string name="app_had_set_been_default">The Tool has been set to default Sms Successfully.</string>
+</resources>

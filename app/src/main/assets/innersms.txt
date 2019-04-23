@@ -1,0 +1,20 @@
+ICICIB	Dear Customer, your Account XX4657 has been credited with INR 17,000.00 on 12-Mar-18. Info: BY CASH-BANGALORE - DOMLUR. The Available Balance is INR 3,49,251.08.
+VK-ICICIB	Dear Customer, your Account XX4657 has been credited with INR 17,000.00 on 12-Mar-18. Info: BY CASH-BANGALORE - DOMLUR. The Available Balance is INR 3,49,251.08.
+ICICIB	Dear Customer, your Account XX4657 has been credited with INR 2,000.00 on 14-Mar-18. Info: NFS*WDL RVSL*14-03-18*234001. The Available Balance is INR 3,44,222.07.
+TM-ICICIB	Dear Customer, your Account XX4657 has been credited with INR 2,000.00 on 14-Mar-18. Info: NFS*WDL RVSL*14-03-18*234001. The Available Balance is INR 3,44,222.07.
+ICICIB	Dear Customer, your Account XX4657 has been credited with INR 70,000.00 on 15-Feb-18. Info: INF*020429987821*. The Available Balance is INR 4,15,828.23.
+VM-ICICIB	Dear Customer, your Account XX4657 has been credited with INR 70,000.00 on 15-Feb-18. Info: INF*020429987821*. The Available Balance is INR 4,15,828.23.
+ICICIB	Dear Customer, your Account XX4657 has been credited with INR 7,000.00 on 19-Mar-18. Info: BY CASH-BANGALORE - DOMLUR. The Available Balance is INR 3,46,774.12.
+TM-ICICIB	Dear Customer, your Account XX4657 has been credited with INR 7,000.00 on 19-Mar-18. Info: BY CASH-BANGALORE - DOMLUR. The Available Balance is INR 3,46,774.12.
+ICICIB	Dear Customer, your Account XX4657 has been credited with INR 50,000.00 on 21-Mar-18. Info: INF*020470196511*Reimburseme. The Available Balance is INR 3,96,774.12.
+TM-ICICIB	Dear Customer, your Account XX4657 has been credited with INR 50,000.00 on 21-Mar-18. Info: INF*020470196511*Reimburseme. The Available Balance is INR 3,96,774.12.
+ICICIB	Dear Customer, your Account XX4657 has been debited with INR 12,005.90 on 03-Apr-18. Info: MMT*809316767899*chgRs5.00GS. The Available Balance is INR 3,78,042.72.
+IM-ICICIB	Dear Customer, your Account XX4657 has been debited with INR 12,005.90 on 03-Apr-18. Info: MMT*809316767899*chgRs5.00GS. The Available Balance is INR 3,78,042.72.
+ICICIB	Dear Customer, your Account XX4657 has been debited with INR 5,002.95 on 13-Mar-18. Info: BIL*001411295566*NchgRs2.50G. The Available Balance is INR 3,44,222.07.
+IM-ICICIB	Dear Customer, your Account XX4657 has been debited with INR 5,002.95 on 13-Mar-18. Info: BIL*001411295566*NchgRs2.50G. The Available Balance is INR 3,44,222.07.
+AX-ICICIB	Dear Customer, your Account XX4657 has been debited with INR 2,000.00 on 14-Mar-18. Info: NFS*CASH WDL*14. The Available Balance is INR 3,42,222.07.
+ICICIB	Dear Customer, your Account XX4657 has been debited with INR 2,000.00 on 14-Mar-18. Info: NFS*CASH WDL*14. The Available Balance is INR 3,42,222.07.
+ICICIB	Dear Customer, your Account XX4657 has been debited with INR 2,000.00 on 15-Mar-18. Info: NFS*CASH WDL*15. The Available Balance is INR 3,41,905.07.
+TM-ICICIB	Dear Customer, your Account XX4657 has been debited with INR 2,000.00 on 15-Mar-18. Info: NFS*CASH WDL*15. The Available Balance is INR 3,41,905.07.
+ICICIB	Dear Customer, your Account XX4657 has been debited with INR 2,002.95 on 17-Mar-18. Info: BIL*001413926733*NchgRs2.50G. The Available Balance is INR 3,39,774.12.
+IM-ICICIB	Dear Customer, your Account XX4657 has been debited with INR 2,002.95 on 17-Mar-18. Info: BIL*001413926733*NchgRs2.50G. The Available Balance is INR 3,39,774.12.
