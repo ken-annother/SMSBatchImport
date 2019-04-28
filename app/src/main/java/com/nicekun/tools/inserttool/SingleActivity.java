@@ -4,14 +4,13 @@ import android.content.ContentValues;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class SingleInsertActivity extends AppCompatActivity implements View.OnClickListener {
+public class SingleInsertActivity extends BaseInsertSmsActivity implements View.OnClickListener {
 
     private EditText mSmsFrom;
     private EditText mSmsbody;
@@ -49,6 +48,11 @@ public class SingleInsertActivity extends AppCompatActivity implements View.OnCl
     private void saveSms(String from, String body) {
         if (from == null || TextUtils.isEmpty(from)) {
             Toast.makeText(this, "please enter sms number", Toast.LENGTH_SHORT).show();
+        }
+
+        if(isNotDefaultSmsApp()){
+            settingDefaultSmsApp();
+            return;
         }
 
         Uri url = Uri.parse("content://sms/");
