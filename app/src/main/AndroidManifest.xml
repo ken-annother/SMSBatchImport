@@ -6,6 +6,7 @@
     <uses-permission android:name="android.permission.WRITE_SMS" />
     <uses-permission android:name="android.permission.READ_SMS" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
 
     <application
@@ -78,9 +79,13 @@
         </service>
 
         <activity
-            android:theme="@style/ContentPageTheme"
-            android:name=".SingleInsertActivity"
-            android:launchMode="singleTask"
+            android:name=".SingleActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ContentPageTheme" />
+
+        <activity
+            android:label="@string/backup_sms"
+            android:name=".BackupActivity"
             android:screenOrientation="portrait" />
     </application>
 

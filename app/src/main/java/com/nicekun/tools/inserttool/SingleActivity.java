@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class SingleInsertActivity extends BaseInsertSmsActivity implements View.OnClickListener {
+public class SingleActivity extends BaseSmsActivity implements View.OnClickListener {
 
     private EditText mSmsFrom;
     private EditText mSmsbody;

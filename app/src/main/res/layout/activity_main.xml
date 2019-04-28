@@ -20,7 +20,7 @@
         android:id="@+id/import_inner_data"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="20dp"
         android:text="@string/import_inner_data"
         app:layout_constraintEnd_toEndOf="@+id/setting_default_sms_app"
         app:layout_constraintStart_toStartOf="@+id/setting_default_sms_app"
@@ -30,7 +30,7 @@
         android:id="@+id/import_from_outer"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="20dp"
         android:text="@string/import_from_outer"
         app:layout_constraintEnd_toEndOf="@+id/import_inner_data"
         app:layout_constraintHorizontal_bias="0.0"
@@ -50,11 +50,22 @@
     <Button
         android:id="@+id/insert_single_sms"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="28dp"
         android:text="@string/inport_single_sms"
         app:layout_constraintBottom_toBottomOf="@+id/import_from_outer"
         app:layout_constraintStart_toEndOf="@+id/import_from_outer"
         app:layout_constraintTop_toTopOf="@+id/import_from_outer"
         app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/backup_system_sms"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/backup_system_sms"
+        app:layout_constraintEnd_toEndOf="@+id/import_from_outer"
+        app:layout_constraintHorizontal_bias="0.431"
+        app:layout_constraintStart_toStartOf="@+id/import_from_outer"
+        app:layout_constraintTop_toBottomOf="@+id/import_from_outer" />
 </android.support.constraint.ConstraintLayout>

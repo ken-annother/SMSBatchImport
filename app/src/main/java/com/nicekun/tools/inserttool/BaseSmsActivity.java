@@ -1,14 +1,18 @@
 package com.nicekun.tools.inserttool;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.provider.Telephony;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
-public abstract class BaseInsertSmsActivity extends AppCompatActivity {
+import java.io.File;
+
+public abstract class BaseSmsActivity extends AppCompatActivity {
 
     // 判断是否缺少权限
     protected boolean lacksPermission(String permission) {
@@ -48,5 +52,12 @@ public abstract class BaseInsertSmsActivity extends AppCompatActivity {
         }
 
         return false;
+    }
+
+
+    protected void scanFile(String filePath) {
+        Intent scanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        scanIntent.setData(Uri.fromFile(new File(filePath)));
+        sendBroadcast(scanIntent);
     }
 }

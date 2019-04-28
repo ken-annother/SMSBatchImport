@@ -9,4 +9,8 @@
     <string name="inport_single_sms">导入单条短信</string>
     <string name="sms_body">请输入短信内容</string>
     <string name="sms_from">请输入短信号码</string>
+    <string name="backup_system_sms">备份系统短信</string>
+    <string name="backup_sms">备份短信</string>
+    <string name="backup_start_now">开始备份</string>
+    <string name="save_path_tip">备份文件保存在:%s</string>
 </resources>

@@ -7,12 +7,9 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
@@ -32,7 +29,7 @@ import java.util.concurrent.Executors;
 import static com.nicekun.tools.inserttool.SmsDataParser.TYPE_CSV;
 import static com.nicekun.tools.inserttool.SmsDataParser.TYPE_XML;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+public class MainActivity extends BaseSmsActivity implements View.OnClickListener {
 
     private TextView mTvDefaultAppTips;
     private ExecutorService mExecutorService = Executors.newSingleThreadExecutor();
@@ -51,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.import_inner_data).setOnClickListener(this);
         findViewById(R.id.import_from_outer).setOnClickListener(this);
         findViewById(R.id.insert_single_sms).setOnClickListener(this);
+        findViewById(R.id.backup_system_sms).setOnClickListener(this);
         mTvDefaultAppTips = findViewById(R.id.default_tips);
     }
 
@@ -96,8 +94,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }
                 break;
+
             case R.id.insert_single_sms:
-                startActivity(new Intent(this,SingleInsertActivity.class));
+                startActivity(new Intent(this, SingleActivity.class));
+                break;
+
+            case R.id.backup_system_sms:
+                startActivity(new Intent(this,BackupActivity.class));
                 break;
         }
     }
@@ -190,21 +193,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         void onFinished(int smsNumer);
     }
 
-
-    /**
-     * 检查写短信的权限
-     */
-    private void checkSmsWritePermission() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {  // 6.0以下不用检查
-            return;
-        }
-
-        if (lacksPermission(Manifest.permission.READ_SMS)) {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_SMS}, 321);
-        }
-    }
-
-
     private boolean checkSDCardWritePermission() {
         if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {  // 6.0以下不用检查
             return true;
@@ -232,45 +220,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
-    // 判断是否缺少权限
-    private boolean lacksPermission(String permission) {
-        return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED;
-    }
 
-
-    private void settingDefaultSmsApp() {
-        String defaultSmsApp = "";
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            defaultSmsApp = Telephony.Sms.getDefaultSmsPackage(this);//获取手机当前设置的默认短信应用的包名
-        }
-        String packageName = getPackageName();
-        if (!defaultSmsApp.equals(packageName)) {
-            Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
-            intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, packageName);
-            startActivity(intent);
-        } else {
-//            mTvDefaultAppTips.setText(getString(R.string.app_had_set_been_default));
-            Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
-            intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, "");
-            startActivity(intent);
-        }
-    }
-
-    private boolean isNotDefaultSmsApp() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
-            return false;
-        }
-
-        String defaultSmsApp = Telephony.Sms.getDefaultSmsPackage(this);//获取手机当前设置的默认短信应用的包名
-
-        String packageName = getPackageName();
-        if (!defaultSmsApp.equals(packageName)) {
-            Toast.makeText(this, "The app is not the default sms . please to set it first!", Toast.LENGTH_SHORT).show();
-            return true;
-        }
-
-        return false;
-    }
 
 
 }
