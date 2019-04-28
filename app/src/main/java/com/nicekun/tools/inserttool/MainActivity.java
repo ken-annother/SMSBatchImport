@@ -1,11 +1,10 @@
 package com.nicekun.tools.inserttool;
 
 import android.Manifest;
-import android.content.ActivityNotFoundException;
+import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.Telephony;
@@ -19,10 +18,14 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.leon.lfilepickerlibrary.LFilePicker;
+import com.leon.lfilepickerlibrary.utils.Constant;
+
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -47,7 +50,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         findViewById(R.id.setting_default_sms_app).setOnClickListener(this);
         findViewById(R.id.import_inner_data).setOnClickListener(this);
         findViewById(R.id.import_from_outer).setOnClickListener(this);
+        findViewById(R.id.insert_single_sms).setOnClickListener(this);
         mTvDefaultAppTips = findViewById(R.id.default_tips);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!isNotDefaultSmsApp()) {
+            mTvDefaultAppTips.setText(getString(R.string.app_already_default));
+        }
     }
 
     @Override
@@ -84,6 +96,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 }
                 break;
+            case R.id.insert_single_sms:
+                startActivity(new Intent(this,SingleInsertActivity.class));
+                break;
         }
     }
 
@@ -91,15 +106,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private static final int PERMISSION_WRITE_SDCARD_REQUEST_CODE = 810;
 
+    @SuppressLint("ResourceType")
     private void importDataFromSDCard() {
-        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("*/*");//设置类型，我这里是任意类型，任意后缀的可以这样写。
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        try {
-            startActivityForResult(intent, OPEN_SMS_DATA_REQUEST_CODE);
-        } catch (ActivityNotFoundException e) {
-            Toast.makeText(this, "oh my god, not fount file explore in this devices -_-!!", Toast.LENGTH_SHORT).show();
-        }
+        new LFilePicker()
+                .withActivity(MainActivity.this)
+                .withBackgroundColor(getResources().getString(R.color.colorPrimary))
+                .withRequestCode(OPEN_SMS_DATA_REQUEST_CODE)
+                .withIconStyle(Constant.ICON_STYLE_GREEN)
+                .withTitle(getResources().getString(R.string.sms_file_select_title))
+                .withFileFilter(new String[]{".txt", ".xml", ".csv"})
+                .withMutilyMode(false)
+                .start();
 
     }
 
@@ -109,28 +126,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == OPEN_SMS_DATA_REQUEST_CODE) {
             if (data != null) {
-                Uri uri = data.getData();//得到uri，后面就是将uri转化成file的过程。
-                if (uri != null) {
-                    String file = uri.getPath();
-                    if (!TextUtils.isEmpty(file)) {
-                        int fileType;
-                        if (file.endsWith(".xml")) {
-                            fileType = TYPE_XML;
-                        } else if (file.endsWith(".txt")|| file.endsWith(".csv")) {
-                            fileType = TYPE_CSV;
-                        } else {
-                            fileType = TYPE_CSV;
-                        }
-
-                        try {
-                            insertSMSData(new FileInputStream(file), fileType);
-                        } catch (FileNotFoundException e) {
-                            e.printStackTrace();
-                        }
-                    }
+                List<String> files = data.getStringArrayListExtra(com.leon.lfilepickerlibrary.utils.Constant.RESULT_INFO);
+                if (files == null || files.size() == 0) {
+                    return;
                 }
-            } else {
-                Toast.makeText(this, "take back the  file path error,please try again!", Toast.LENGTH_SHORT).show();
+                String file = files.get(0);
+
+                if (!TextUtils.isEmpty(file)) {
+                    int fileType;
+                    if (file.endsWith(".xml")) {
+                        fileType = TYPE_XML;
+                    } else if (file.endsWith(".txt") || file.endsWith(".csv")) {
+                        fileType = TYPE_CSV;
+                    } else {
+                        fileType = TYPE_CSV;
+                    }
+
+                    try {
+                        insertSMSData(new FileInputStream(file), fileType);
+                    } catch (FileNotFoundException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    Toast.makeText(this, "take back the  file path error,please try again!", Toast.LENGTH_SHORT).show();
+                }
             }
         }
     }
@@ -200,7 +219,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
         if (requestCode == PERMISSION_WRITE_SDCARD_REQUEST_CODE) {
@@ -220,7 +240,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void settingDefaultSmsApp() {
         String defaultSmsApp = "";
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             defaultSmsApp = Telephony.Sms.getDefaultSmsPackage(this);//获取手机当前设置的默认短信应用的包名
         }
         String packageName = getPackageName();
@@ -229,12 +249,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, packageName);
             startActivity(intent);
         } else {
-            mTvDefaultAppTips.setText(getString(R.string.app_had_set_been_default));
+//            mTvDefaultAppTips.setText(getString(R.string.app_had_set_been_default));
+            Intent intent = new Intent(Telephony.Sms.Intents.ACTION_CHANGE_DEFAULT);
+            intent.putExtra(Telephony.Sms.Intents.EXTRA_PACKAGE_NAME, "");
+            startActivity(intent);
         }
     }
 
     private boolean isNotDefaultSmsApp() {
-        if (android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.KITKAT) {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT) {
             return false;
         }
 

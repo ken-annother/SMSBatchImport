@@ -1,7 +1,12 @@
 <resources>
     <string name="app_name">SMS Insert</string>
-    <string name="setting_default_sms_app">Set As Default SMS App</string>
+    <string name="setting_default_sms_app">Modify System Default SMS App</string>
     <string name="import_inner_data">Import Default Sms DataSet</string>
     <string name="import_from_outer">Import From SD Card</string>
-    <string name="app_had_set_been_default">The Tool has been set to default Sms Successfully.</string>
+    <string name="app_had_set_been_default">The Tool has been set to default SMS successfully.</string>
+    <string name="app_already_default">Set as default Sms already.</string>
+    <string name="sms_file_select_title">SMS Batch File Selector</string>
+    <string name="inport_single_sms">Import Single SMS</string>
+    <string name="sms_body">Sms body</string>
+    <string name="sms_from">SMS FROM</string>
 </resources>
