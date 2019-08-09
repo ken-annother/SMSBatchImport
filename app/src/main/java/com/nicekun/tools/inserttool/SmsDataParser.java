@@ -25,7 +25,7 @@ public class SmsDataParser {
 
     private static final Pattern sXML_REGX_START = Pattern.compile("<string\\s+.*>");
     private static final Pattern sXML_REGX_END = Pattern.compile("</string>");
-    private static final Pattern sPattern = Pattern.compile("<string\\s+name=\\\"(.*)\\\"><!\\[CDATA\\[(.*)\\]\\]></string>", Pattern.DOTALL);
+    private static final Pattern sPattern = Pattern.compile("<string.*\\s+(?=name=\\\"(.*?)\\\")(?:.*\">)<!\\[CDATA\\[(.*)\\]\\]></string>", Pattern.DOTALL);
 
     private static ExecutorService sExecutorService = Executors.newFixedThreadPool(3);
 
